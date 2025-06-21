@@ -14,7 +14,7 @@ class ShippingAddress(models.Model):
     shipping_city = models.CharField(max_length=255)
     shipping_state = models.CharField(max_length=255, null=True, blank=True)
     shipping_zipcode = models.CharField(max_length=255, null=True, blank=True)
-    shipping_country = models.CharField(max_length=255)
+    shipping_country = models.CharField(max_length=256)
 
     # Dont pluralize addresss
     class Meta:

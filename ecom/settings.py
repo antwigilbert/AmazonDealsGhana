@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+#import dj_database_url
 #from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'cart',
-    'payment',
+    'payment',  
 ]
 
 MIDDLEWARE = [
@@ -73,20 +74,27 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  
+       'NAME': BASE_DIR / 'db.sqlite3',
+#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'ecom',
+#        'USER': 'postgres',
+#       'PASSWORD': os.environ.get('DB_PASSWORD_ANNABEL'),
+#        'PORT': '5432',
+#        'HOST': 'localhost',
     }
 }
 
+#DATABASES['default'] = dj_database_url.parse("postgresql://ecommerce_tp1p_user:SDwVGqMe52VEYarBYfKnUrvMkjaqX4pW@dpg-ctvqbnbtq21c73ahv8mg-a.oregon-postgres.render.com/ecommerce_tp1p")
+
 #DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'railway',
-        #'USER': 'postgres',
-        #'PASSWORD': os.environ.get('DB_PASSWORD_ANNABEL'),
-        #'HOST': 'postgres.railway.internal',
-        #'PORT': '5432',
-        
-    #}
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'ecom',
+#        'USER': 'postgres',
+#       'PASSWORD': os.environ.get('DB_PASSWORD_ANNABEL'),
+#        'PORT': '5432',
+#        'HOST': 'localhost',
+#    }
 #}
 
 
@@ -125,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = ['static/']
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
