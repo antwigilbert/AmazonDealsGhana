@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from decouple import config
 #import dj_database_url
 #from dotenv import load_dotenv
 
@@ -71,24 +72,11 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'ecom',
-#        'USER': 'postgres',
-#       'PASSWORD': os.environ.get('DB_PASSWORD_ANNABEL'),
-#        'PORT': '5432',
-#        'HOST': 'localhost',
-    }
-}
-
-#DATABASES['default'] = dj_database_url.parse("postgresql://ecommerce_tp1p_user:SDwVGqMe52VEYarBYfKnUrvMkjaqX4pW@dpg-ctvqbnbtq21c73ahv8mg-a.oregon-postgres.render.com/ecommerce_tp1p")
-
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'ENGINE': 'django.db.backends.sqlite3',
+#       'NAME': BASE_DIR / 'db.sqlite3',
+#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #        'NAME': 'ecom',
 #        'USER': 'postgres',
 #       'PASSWORD': os.environ.get('DB_PASSWORD_ANNABEL'),
@@ -96,6 +84,19 @@ DATABASES = {
 #        'HOST': 'localhost',
 #    }
 #}
+
+#DATABASES['default'] = dj_database_url.parse("postgresql://ecommerce_tp1p_user:SDwVGqMe52VEYarBYfKnUrvMkjaqX4pW@dpg-ctvqbnbtq21c73ahv8mg-a.oregon-postgres.render.com/ecommerce_tp1p")
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ecom_db',
+        'USER': 'root',
+       'PASSWORD': config('DB_PASSWORD_ANNABEL'), # Fetch from .env
+        'PORT': '3306',
+        'HOST': 'localhost',
+    }
+}
 
 
 # Password validation
