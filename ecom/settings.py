@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 from decouple import config
-#import dj_database_url
+import dj_database_url
 #from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,7 @@ SECRET_KEY = 'django-insecure-ymrl+!mes3w&vl+(t7#st!27f4zqz63(&vj!j0x81$#(fs3&tt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -143,3 +143,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Deployment setup
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+ALLOWED_HOSTS = ['.onrender.com']
+
+if os.getenv('RENDER'):
+    DEBUG = False
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-key')
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='MySQL:///ecom_db.sql',
+            conn_maxx_age=600,
+            ssl_require=True
+        )
+    }
